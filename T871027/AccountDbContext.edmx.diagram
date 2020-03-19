@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="c76ed2d8d01a43ff83fecde7b7d1af24" Name="Diagram1">
+        <EntityTypeShape EntityType="SalaryAppModel.AccountStatement" Width="1.5" PointX="5.25" PointY="6.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="SalaryAppModel.Currency" Width="1.5" PointX="6" PointY="2.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SalaryAppModel.Employee" Width="1.5" PointX="6" PointY="13.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="SalaryAppModel.EmployeeAttachments" Width="1.5" PointX="8.25" PointY="15.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SalaryAppModel.FixedOperation" Width="1.5" PointX="8.25" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SalaryAppModel.Operation" Width="1.5" PointX="3" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SalaryAppModel.OperationType" Width="1.5" PointX="0.75" PointY="8.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="SalaryAppModel.sysdiagrams" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SalaryAppModel.User" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SalaryAppModel.Voucher" Width="1.5" PointX="8.25" PointY="1.5" IsExpanded="true" />
+        <AssociationConnector Association="SalaryAppModel.FK_AccountStatement_Currency" ManuallyRouted="false" />
+        <AssociationConnector Association="SalaryAppModel.FK_AccountStatement_Employee" ManuallyRouted="false" />
+        <AssociationConnector Association="SalaryAppModel.FK_AccountStatement_Operation" ManuallyRouted="false" />
+        <AssociationConnector Association="SalaryAppModel.FK_FixedOperation_Currency" ManuallyRouted="false" />
+        <AssociationConnector Association="SalaryAppModel.FK_Voucher_Currency" ManuallyRouted="false" />
+        <AssociationConnector Association="SalaryAppModel.FK_EmployeeAttachment_Employee" ManuallyRouted="false" />
+        <AssociationConnector Association="SalaryAppModel.FK_FixedOperation_Employee" ManuallyRouted="false" />
+        <AssociationConnector Association="SalaryAppModel.FK_Voucher_Employee" ManuallyRouted="false" />
+        <AssociationConnector Association="SalaryAppModel.FK_FixedOperation_Operation" ManuallyRouted="false" />
+        <AssociationConnector Association="SalaryAppModel.FK_Operation_OperationType" ManuallyRouted="false" />
+        <AssociationConnector Association="SalaryAppModel.FK_Voucher_Operation" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="ReportDataSet" targetNamespace="http://tempuri.org/ReportDataSet.xsd" xmlns:mstns="http://tempuri.org/ReportDataSet.xsd" xmlns="http://tempuri.org/ReportDataSet.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections />
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="ReportDataSet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="ReportDataSet" msprop:Generator_UserDSName="ReportDataSet">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="ReportTable" msprop:Generator_TableClassName="ReportTableDataTable" msprop:Generator_TableVarName="tableReportTable" msprop:Generator_TablePropName="ReportTable" msprop:Generator_RowDeletingName="ReportTableRowDeleting" msprop:Generator_RowChangingName="ReportTableRowChanging" msprop:Generator_RowEvHandlerName="ReportTableRowChangeEventHandler" msprop:Generator_RowDeletedName="ReportTableRowDeleted" msprop:Generator_UserTableName="ReportTable" msprop:Generator_RowChangedName="ReportTableRowChanged" msprop:Generator_RowEvArgName="ReportTableRowChangeEvent" msprop:Generator_RowClassName="ReportTableRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="EmployeeName" msprop:Generator_ColumnVarNameInTable="columnEmployeeName" msprop:Generator_ColumnPropNameInRow="EmployeeName" msprop:Generator_ColumnPropNameInTable="EmployeeNameColumn" msprop:Generator_UserColumnName="EmployeeName" type="xs:string" minOccurs="0" />
+              <xs:element name="OperationName" msprop:Generator_ColumnVarNameInTable="columnOperationName" msprop:Generator_ColumnPropNameInRow="OperationName" msprop:Generator_ColumnPropNameInTable="OperationNameColumn" msprop:Generator_UserColumnName="OperationName" type="xs:string" minOccurs="0" />
+              <xs:element name="SumOfDebit" msprop:Generator_ColumnVarNameInTable="columnSumOfDebit" msprop:Generator_ColumnPropNameInRow="SumOfDebit" msprop:Generator_ColumnPropNameInTable="SumOfDebitColumn" msprop:Generator_UserColumnName="SumOfDebit" type="xs:string" minOccurs="0" />
+              <xs:element name="SumOfCredit" msprop:Generator_ColumnVarNameInTable="columnSumOfCredit" msprop:Generator_ColumnPropNameInRow="SumOfCredit" msprop:Generator_ColumnPropNameInTable="SumOfCreditColumn" msprop:Generator_UserColumnName="SumOfCredit" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

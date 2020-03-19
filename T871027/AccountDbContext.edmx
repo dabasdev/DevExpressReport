@@ -1,0 +1,914 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="SalaryAppModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="AccountStatement">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="GeneralEntryCode" Type="nvarchar" MaxLength="15" />
+          <Property Name="EntryCode" Type="nvarchar" MaxLength="15" />
+          <Property Name="TheDate" Type="date" />
+          <Property Name="EmployeeId" Type="int" />
+          <Property Name="Debit" Type="decimal" Precision="8" Scale="2" />
+          <Property Name="Credit" Type="decimal" Precision="8" Scale="2" />
+          <Property Name="CurrencyId" Type="int" />
+          <Property Name="ExchangeRate" Type="decimal" Precision="8" Scale="3" />
+          <Property Name="OperationId" Type="int" />
+          <Property Name="TheMonth" Type="int" />
+          <Property Name="TheYear" Type="int" />
+          <Property Name="Details" Type="nvarchar(max)" />
+          <Property Name="IsActive" Type="bit" />
+          <Property Name="PcNameWhoAdded" Type="nvarchar" MaxLength="50" />
+          <Property Name="PcNameWhoModified" Type="nvarchar" MaxLength="50" />
+          <Property Name="PcNameWhoDeleted" Type="nvarchar" MaxLength="50" />
+          <Property Name="UserWhoAdded" Type="nvarchar" MaxLength="50" />
+          <Property Name="UserWhoModified" Type="nvarchar" MaxLength="50" />
+          <Property Name="UserWhoDeleted" Type="nvarchar" MaxLength="50" />
+          <Property Name="ForeignDebitVoucherAmount" Type="decimal" Precision="8" Scale="2" />
+          <Property Name="ForeignCreditVoucherAmount" Type="decimal" Precision="8" Scale="2" />
+        </EntityType>
+        <EntityType Name="Currency">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CurrencyName" Type="nvarchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="Employee">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="EmployeeCode" Type="nvarchar" MaxLength="15" />
+          <Property Name="EmployeeName" Type="nvarchar" MaxLength="250" />
+          <Property Name="BasicSalary" Type="decimal" Precision="8" Scale="2" />
+          <Property Name="IdNumber" Type="nvarchar" MaxLength="9" />
+          <Property Name="BirthOfDate" Type="date" />
+          <Property Name="ChildrenNumber" Type="int" />
+          <Property Name="Department" Type="nvarchar" MaxLength="20" />
+          <Property Name="EducationLevel" Type="nvarchar" MaxLength="20" />
+          <Property Name="EmployeeType" Type="nvarchar" MaxLength="5" />
+          <Property Name="Gender" Type="nvarchar" MaxLength="5" />
+          <Property Name="MaritalStatus" Type="nvarchar" MaxLength="10" />
+          <Property Name="MobileNumber" Type="nvarchar" MaxLength="10" />
+          <Property Name="PhoneNumber" Type="nvarchar" MaxLength="10" />
+          <Property Name="Speciality" Type="nvarchar" MaxLength="50" />
+          <Property Name="HireDate" Type="date" />
+          <Property Name="Address" Type="nvarchar(max)" />
+          <Property Name="IsCivilEmployee" Type="bit" />
+          <Property Name="EmployerJob" Type="nvarchar" MaxLength="20" />
+          <Property Name="CivilSalary" Type="decimal" Precision="8" Scale="2" />
+          <Property Name="EmployeeImage" Type="varbinary(max)" />
+          <Property Name="OpeningNis" Type="decimal" Precision="8" Scale="2" />
+          <Property Name="OpeningUsd" Type="decimal" Precision="8" Scale="2" />
+          <Property Name="IsActive" Type="bit" />
+        </EntityType>
+        <EntityType Name="EmployeeAttachments">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="EmployeeId" Type="int" />
+          <Property Name="FileName" Type="nvarchar" MaxLength="250" />
+          <Property Name="FileData" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="FixedOperation">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="EmployeeId" Type="int" Nullable="false" />
+          <Property Name="OperationId" Type="int" Nullable="false" />
+          <Property Name="Amount" Type="decimal" Precision="8" Scale="2" Nullable="false" />
+          <Property Name="CurrencyId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Operation">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="OperationName" Type="nvarchar" MaxLength="50" />
+          <Property Name="OperationTypeId" Type="int" />
+          <Property Name="IsFixed" Type="bit" />
+        </EntityType>
+        <EntityType Name="OperationType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="OperationTypeName" Type="nvarchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar(max)" />
+          <Property Name="Password" Type="nvarchar(max)" />
+          <Property Name="UserFullName" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Voucher">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="VoucherCode" Type="nvarchar" MaxLength="15" Nullable="false" />
+          <Property Name="EmployeeId" Type="int" Nullable="false" />
+          <Property Name="TheDate" Type="date" Nullable="false" />
+          <Property Name="OperationId" Type="int" Nullable="false" />
+          <Property Name="VoucherAmount" Type="decimal" Precision="8" Scale="2" Nullable="false" />
+          <Property Name="CurrencyId" Type="int" Nullable="false" />
+          <Property Name="ExchangeRate" Type="decimal" Precision="8" Scale="3" Nullable="false" />
+          <Property Name="ForeignVoucherAmount" Type="decimal" Precision="8" Scale="2" />
+          <Property Name="Details" Type="nvarchar(max)" />
+          <Property Name="PcNameWhoAdded" Type="nvarchar" MaxLength="50" />
+          <Property Name="PcNameWhoModified" Type="nvarchar" MaxLength="50" />
+          <Property Name="PcNameWhoDeleted" Type="nvarchar" MaxLength="50" />
+          <Property Name="UserWhoAdded" Type="nvarchar" MaxLength="50" />
+          <Property Name="UserWhoModified" Type="nvarchar" MaxLength="50" />
+          <Property Name="UserWhoDeleted" Type="nvarchar" MaxLength="50" />
+          <Property Name="IsActive" Type="bit" />
+          <Property Name="IsFixed" Type="bit" />
+        </EntityType>
+        <Association Name="FK_AccountStatement_Currency">
+          <End Role="Currency" Type="Self.Currency" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AccountStatement" Type="Self.AccountStatement" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Currency">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AccountStatement">
+              <PropertyRef Name="CurrencyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AccountStatement_Employee">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AccountStatement" Type="Self.AccountStatement" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AccountStatement">
+              <PropertyRef Name="EmployeeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AccountStatement_Operation">
+          <End Role="Operation" Type="Self.Operation" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AccountStatement" Type="Self.AccountStatement" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Operation">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AccountStatement">
+              <PropertyRef Name="OperationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EmployeeAttachment_Employee">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="EmployeeAttachments" Type="Self.EmployeeAttachments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="EmployeeAttachments">
+              <PropertyRef Name="EmployeeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FixedOperation_Currency">
+          <End Role="Currency" Type="Self.Currency" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="FixedOperation" Type="Self.FixedOperation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Currency">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="FixedOperation">
+              <PropertyRef Name="CurrencyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FixedOperation_Employee">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="FixedOperation" Type="Self.FixedOperation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="FixedOperation">
+              <PropertyRef Name="EmployeeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FixedOperation_Operation">
+          <End Role="Operation" Type="Self.Operation" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="FixedOperation" Type="Self.FixedOperation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Operation">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="FixedOperation">
+              <PropertyRef Name="OperationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Operation_OperationType">
+          <End Role="OperationType" Type="Self.OperationType" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Operation" Type="Self.Operation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OperationType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Operation">
+              <PropertyRef Name="OperationTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Voucher_Currency">
+          <End Role="Currency" Type="Self.Currency" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Voucher" Type="Self.Voucher" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Currency">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Voucher">
+              <PropertyRef Name="CurrencyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Voucher_Employee">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Voucher" Type="Self.Voucher" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Voucher">
+              <PropertyRef Name="EmployeeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Voucher_Operation">
+          <End Role="Operation" Type="Self.Operation" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Voucher" Type="Self.Voucher" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Operation">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Voucher">
+              <PropertyRef Name="OperationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="SalaryAppModelStoreContainer">
+          <EntitySet Name="AccountStatement" EntityType="Self.AccountStatement" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Currency" EntityType="Self.Currency" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Employee" EntityType="Self.Employee" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EmployeeAttachments" EntityType="Self.EmployeeAttachments" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FixedOperation" EntityType="Self.FixedOperation" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Operation" EntityType="Self.Operation" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OperationType" EntityType="Self.OperationType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Voucher" EntityType="Self.Voucher" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_AccountStatement_Currency" Association="Self.FK_AccountStatement_Currency">
+            <End Role="Currency" EntitySet="Currency" />
+            <End Role="AccountStatement" EntitySet="AccountStatement" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AccountStatement_Employee" Association="Self.FK_AccountStatement_Employee">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="AccountStatement" EntitySet="AccountStatement" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AccountStatement_Operation" Association="Self.FK_AccountStatement_Operation">
+            <End Role="Operation" EntitySet="Operation" />
+            <End Role="AccountStatement" EntitySet="AccountStatement" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EmployeeAttachment_Employee" Association="Self.FK_EmployeeAttachment_Employee">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="EmployeeAttachments" EntitySet="EmployeeAttachments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FixedOperation_Currency" Association="Self.FK_FixedOperation_Currency">
+            <End Role="Currency" EntitySet="Currency" />
+            <End Role="FixedOperation" EntitySet="FixedOperation" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FixedOperation_Employee" Association="Self.FK_FixedOperation_Employee">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="FixedOperation" EntitySet="FixedOperation" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FixedOperation_Operation" Association="Self.FK_FixedOperation_Operation">
+            <End Role="Operation" EntitySet="Operation" />
+            <End Role="FixedOperation" EntitySet="FixedOperation" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Operation_OperationType" Association="Self.FK_Operation_OperationType">
+            <End Role="OperationType" EntitySet="OperationType" />
+            <End Role="Operation" EntitySet="Operation" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Voucher_Currency" Association="Self.FK_Voucher_Currency">
+            <End Role="Currency" EntitySet="Currency" />
+            <End Role="Voucher" EntitySet="Voucher" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Voucher_Employee" Association="Self.FK_Voucher_Employee">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="Voucher" EntitySet="Voucher" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Voucher_Operation" Association="Self.FK_Voucher_Operation">
+            <End Role="Operation" EntitySet="Operation" />
+            <End Role="Voucher" EntitySet="Voucher" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="SalaryAppModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="AccountStatement">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="GeneralEntryCode" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="EntryCode" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="TheDate" Type="DateTime" Precision="0" />
+          <Property Name="EmployeeId" Type="Int32" />
+          <Property Name="Debit" Type="Decimal" Precision="8" Scale="2" />
+          <Property Name="Credit" Type="Decimal" Precision="8" Scale="2" />
+          <Property Name="CurrencyId" Type="Int32" />
+          <Property Name="ExchangeRate" Type="Decimal" Precision="8" Scale="3" />
+          <Property Name="OperationId" Type="Int32" />
+          <Property Name="TheMonth" Type="Int32" />
+          <Property Name="TheYear" Type="Int32" />
+          <Property Name="Details" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IsActive" Type="Boolean" />
+          <Property Name="PcNameWhoAdded" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PcNameWhoModified" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PcNameWhoDeleted" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="UserWhoAdded" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="UserWhoModified" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="UserWhoDeleted" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ForeignDebitVoucherAmount" Type="Decimal" Precision="8" Scale="2" />
+          <Property Name="ForeignCreditVoucherAmount" Type="Decimal" Precision="8" Scale="2" />
+          <NavigationProperty Name="Currency" Relationship="Self.FK_AccountStatement_Currency" FromRole="AccountStatement" ToRole="Currency" />
+          <NavigationProperty Name="Employee" Relationship="Self.FK_AccountStatement_Employee" FromRole="AccountStatement" ToRole="Employee" />
+          <NavigationProperty Name="Operation" Relationship="Self.FK_AccountStatement_Operation" FromRole="AccountStatement" ToRole="Operation" />
+        </EntityType>
+        <EntityType Name="Currency">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CurrencyName" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AccountStatement" Relationship="Self.FK_AccountStatement_Currency" FromRole="Currency" ToRole="AccountStatement" />
+          <NavigationProperty Name="FixedOperation" Relationship="Self.FK_FixedOperation_Currency" FromRole="Currency" ToRole="FixedOperation" />
+          <NavigationProperty Name="Voucher" Relationship="Self.FK_Voucher_Currency" FromRole="Currency" ToRole="Voucher" />
+        </EntityType>
+        <EntityType Name="Employee">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EmployeeCode" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="EmployeeName" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="BasicSalary" Type="Decimal" Precision="8" Scale="2" />
+          <Property Name="IdNumber" Type="String" MaxLength="9" FixedLength="false" Unicode="true" />
+          <Property Name="BirthOfDate" Type="DateTime" Precision="0" />
+          <Property Name="ChildrenNumber" Type="Int32" />
+          <Property Name="Department" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="EducationLevel" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="EmployeeType" Type="String" MaxLength="5" FixedLength="false" Unicode="true" />
+          <Property Name="Gender" Type="String" MaxLength="5" FixedLength="false" Unicode="true" />
+          <Property Name="MaritalStatus" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="MobileNumber" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="Speciality" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="HireDate" Type="DateTime" Precision="0" />
+          <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IsCivilEmployee" Type="Boolean" />
+          <Property Name="EmployerJob" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="CivilSalary" Type="Decimal" Precision="8" Scale="2" />
+          <Property Name="EmployeeImage" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="OpeningNis" Type="Decimal" Precision="8" Scale="2" />
+          <Property Name="OpeningUsd" Type="Decimal" Precision="8" Scale="2" />
+          <Property Name="IsActive" Type="Boolean" />
+          <NavigationProperty Name="AccountStatement" Relationship="Self.FK_AccountStatement_Employee" FromRole="Employee" ToRole="AccountStatement" />
+          <NavigationProperty Name="EmployeeAttachments" Relationship="Self.FK_EmployeeAttachment_Employee" FromRole="Employee" ToRole="EmployeeAttachments" />
+          <NavigationProperty Name="FixedOperation" Relationship="Self.FK_FixedOperation_Employee" FromRole="Employee" ToRole="FixedOperation" />
+          <NavigationProperty Name="Voucher" Relationship="Self.FK_Voucher_Employee" FromRole="Employee" ToRole="Voucher" />
+        </EntityType>
+        <EntityType Name="EmployeeAttachments">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EmployeeId" Type="Int32" />
+          <Property Name="FileName" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="FileData" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <NavigationProperty Name="Employee" Relationship="Self.FK_EmployeeAttachment_Employee" FromRole="EmployeeAttachments" ToRole="Employee" />
+        </EntityType>
+        <EntityType Name="FixedOperation">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EmployeeId" Type="Int32" Nullable="false" />
+          <Property Name="OperationId" Type="Int32" Nullable="false" />
+          <Property Name="Amount" Type="Decimal" Precision="8" Scale="2" Nullable="false" />
+          <Property Name="CurrencyId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Currency" Relationship="Self.FK_FixedOperation_Currency" FromRole="FixedOperation" ToRole="Currency" />
+          <NavigationProperty Name="Employee" Relationship="Self.FK_FixedOperation_Employee" FromRole="FixedOperation" ToRole="Employee" />
+          <NavigationProperty Name="Operation" Relationship="Self.FK_FixedOperation_Operation" FromRole="FixedOperation" ToRole="Operation" />
+        </EntityType>
+        <EntityType Name="Operation">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="OperationName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="OperationTypeId" Type="Int32" />
+          <Property Name="IsFixed" Type="Boolean" />
+          <NavigationProperty Name="AccountStatement" Relationship="Self.FK_AccountStatement_Operation" FromRole="Operation" ToRole="AccountStatement" />
+          <NavigationProperty Name="FixedOperation" Relationship="Self.FK_FixedOperation_Operation" FromRole="Operation" ToRole="FixedOperation" />
+          <NavigationProperty Name="OperationType" Relationship="Self.FK_Operation_OperationType" FromRole="Operation" ToRole="OperationType" />
+          <NavigationProperty Name="Voucher" Relationship="Self.FK_Voucher_Operation" FromRole="Operation" ToRole="Voucher" />
+        </EntityType>
+        <EntityType Name="OperationType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="OperationTypeName" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Operation" Relationship="Self.FK_Operation_OperationType" FromRole="OperationType" ToRole="Operation" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="UserFullName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Voucher">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="VoucherCode" Type="String" MaxLength="15" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="EmployeeId" Type="Int32" Nullable="false" />
+          <Property Name="TheDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="OperationId" Type="Int32" Nullable="false" />
+          <Property Name="VoucherAmount" Type="Decimal" Precision="8" Scale="2" Nullable="false" />
+          <Property Name="CurrencyId" Type="Int32" Nullable="false" />
+          <Property Name="ExchangeRate" Type="Decimal" Precision="8" Scale="3" Nullable="false" />
+          <Property Name="ForeignVoucherAmount" Type="Decimal" Precision="8" Scale="2" />
+          <Property Name="Details" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PcNameWhoAdded" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PcNameWhoModified" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PcNameWhoDeleted" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="UserWhoAdded" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="UserWhoModified" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="UserWhoDeleted" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IsActive" Type="Boolean" />
+          <Property Name="IsFixed" Type="Boolean" />
+          <NavigationProperty Name="Currency" Relationship="Self.FK_Voucher_Currency" FromRole="Voucher" ToRole="Currency" />
+          <NavigationProperty Name="Employee" Relationship="Self.FK_Voucher_Employee" FromRole="Voucher" ToRole="Employee" />
+          <NavigationProperty Name="Operation" Relationship="Self.FK_Voucher_Operation" FromRole="Voucher" ToRole="Operation" />
+        </EntityType>
+        <Association Name="FK_AccountStatement_Currency">
+          <End Role="Currency" Type="Self.Currency" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AccountStatement" Type="Self.AccountStatement" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Currency">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AccountStatement">
+              <PropertyRef Name="CurrencyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AccountStatement_Employee">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AccountStatement" Type="Self.AccountStatement" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AccountStatement">
+              <PropertyRef Name="EmployeeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AccountStatement_Operation">
+          <End Role="Operation" Type="Self.Operation" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AccountStatement" Type="Self.AccountStatement" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Operation">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AccountStatement">
+              <PropertyRef Name="OperationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FixedOperation_Currency">
+          <End Role="Currency" Type="Self.Currency" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="FixedOperation" Type="Self.FixedOperation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Currency">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="FixedOperation">
+              <PropertyRef Name="CurrencyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Voucher_Currency">
+          <End Role="Currency" Type="Self.Currency" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Voucher" Type="Self.Voucher" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Currency">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Voucher">
+              <PropertyRef Name="CurrencyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EmployeeAttachment_Employee">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="EmployeeAttachments" Type="Self.EmployeeAttachments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="EmployeeAttachments">
+              <PropertyRef Name="EmployeeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FixedOperation_Employee">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="FixedOperation" Type="Self.FixedOperation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="FixedOperation">
+              <PropertyRef Name="EmployeeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Voucher_Employee">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Voucher" Type="Self.Voucher" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Voucher">
+              <PropertyRef Name="EmployeeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FixedOperation_Operation">
+          <End Role="Operation" Type="Self.Operation" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="FixedOperation" Type="Self.FixedOperation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Operation">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="FixedOperation">
+              <PropertyRef Name="OperationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Operation_OperationType">
+          <End Role="OperationType" Type="Self.OperationType" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Operation" Type="Self.Operation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OperationType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Operation">
+              <PropertyRef Name="OperationTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Voucher_Operation">
+          <End Role="Operation" Type="Self.Operation" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Voucher" Type="Self.Voucher" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Operation">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Voucher">
+              <PropertyRef Name="OperationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="SalaryAppContext" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="AccountStatement" EntityType="Self.AccountStatement" />
+          <EntitySet Name="Currency" EntityType="Self.Currency" />
+          <EntitySet Name="Employee" EntityType="Self.Employee" />
+          <EntitySet Name="EmployeeAttachments" EntityType="Self.EmployeeAttachments" />
+          <EntitySet Name="FixedOperation" EntityType="Self.FixedOperation" />
+          <EntitySet Name="Operation" EntityType="Self.Operation" />
+          <EntitySet Name="OperationType" EntityType="Self.OperationType" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <EntitySet Name="User" EntityType="Self.User" />
+          <EntitySet Name="Voucher" EntityType="Self.Voucher" />
+          <AssociationSet Name="FK_AccountStatement_Currency" Association="Self.FK_AccountStatement_Currency">
+            <End Role="Currency" EntitySet="Currency" />
+            <End Role="AccountStatement" EntitySet="AccountStatement" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AccountStatement_Employee" Association="Self.FK_AccountStatement_Employee">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="AccountStatement" EntitySet="AccountStatement" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AccountStatement_Operation" Association="Self.FK_AccountStatement_Operation">
+            <End Role="Operation" EntitySet="Operation" />
+            <End Role="AccountStatement" EntitySet="AccountStatement" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FixedOperation_Currency" Association="Self.FK_FixedOperation_Currency">
+            <End Role="Currency" EntitySet="Currency" />
+            <End Role="FixedOperation" EntitySet="FixedOperation" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Voucher_Currency" Association="Self.FK_Voucher_Currency">
+            <End Role="Currency" EntitySet="Currency" />
+            <End Role="Voucher" EntitySet="Voucher" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EmployeeAttachment_Employee" Association="Self.FK_EmployeeAttachment_Employee">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="EmployeeAttachments" EntitySet="EmployeeAttachments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FixedOperation_Employee" Association="Self.FK_FixedOperation_Employee">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="FixedOperation" EntitySet="FixedOperation" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Voucher_Employee" Association="Self.FK_Voucher_Employee">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="Voucher" EntitySet="Voucher" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FixedOperation_Operation" Association="Self.FK_FixedOperation_Operation">
+            <End Role="Operation" EntitySet="Operation" />
+            <End Role="FixedOperation" EntitySet="FixedOperation" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Operation_OperationType" Association="Self.FK_Operation_OperationType">
+            <End Role="OperationType" EntitySet="OperationType" />
+            <End Role="Operation" EntitySet="Operation" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Voucher_Operation" Association="Self.FK_Voucher_Operation">
+            <End Role="Operation" EntitySet="Operation" />
+            <End Role="Voucher" EntitySet="Voucher" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="SalaryAppModelStoreContainer" CdmEntityContainer="SalaryAppContext">
+          <EntitySetMapping Name="AccountStatement">
+            <EntityTypeMapping TypeName="SalaryAppModel.AccountStatement">
+              <MappingFragment StoreEntitySet="AccountStatement">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="GeneralEntryCode" ColumnName="GeneralEntryCode" />
+                <ScalarProperty Name="EntryCode" ColumnName="EntryCode" />
+                <ScalarProperty Name="TheDate" ColumnName="TheDate" />
+                <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" />
+                <ScalarProperty Name="Debit" ColumnName="Debit" />
+                <ScalarProperty Name="Credit" ColumnName="Credit" />
+                <ScalarProperty Name="CurrencyId" ColumnName="CurrencyId" />
+                <ScalarProperty Name="ExchangeRate" ColumnName="ExchangeRate" />
+                <ScalarProperty Name="OperationId" ColumnName="OperationId" />
+                <ScalarProperty Name="TheMonth" ColumnName="TheMonth" />
+                <ScalarProperty Name="TheYear" ColumnName="TheYear" />
+                <ScalarProperty Name="Details" ColumnName="Details" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="PcNameWhoAdded" ColumnName="PcNameWhoAdded" />
+                <ScalarProperty Name="PcNameWhoModified" ColumnName="PcNameWhoModified" />
+                <ScalarProperty Name="PcNameWhoDeleted" ColumnName="PcNameWhoDeleted" />
+                <ScalarProperty Name="UserWhoAdded" ColumnName="UserWhoAdded" />
+                <ScalarProperty Name="UserWhoModified" ColumnName="UserWhoModified" />
+                <ScalarProperty Name="UserWhoDeleted" ColumnName="UserWhoDeleted" />
+                <ScalarProperty Name="ForeignDebitVoucherAmount" ColumnName="ForeignDebitVoucherAmount" />
+                <ScalarProperty Name="ForeignCreditVoucherAmount" ColumnName="ForeignCreditVoucherAmount" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Currency">
+            <EntityTypeMapping TypeName="SalaryAppModel.Currency">
+              <MappingFragment StoreEntitySet="Currency">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="CurrencyName" ColumnName="CurrencyName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Employee">
+            <EntityTypeMapping TypeName="SalaryAppModel.Employee">
+              <MappingFragment StoreEntitySet="Employee">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="EmployeeCode" ColumnName="EmployeeCode" />
+                <ScalarProperty Name="EmployeeName" ColumnName="EmployeeName" />
+                <ScalarProperty Name="BasicSalary" ColumnName="BasicSalary" />
+                <ScalarProperty Name="IdNumber" ColumnName="IdNumber" />
+                <ScalarProperty Name="BirthOfDate" ColumnName="BirthOfDate" />
+                <ScalarProperty Name="ChildrenNumber" ColumnName="ChildrenNumber" />
+                <ScalarProperty Name="Department" ColumnName="Department" />
+                <ScalarProperty Name="EducationLevel" ColumnName="EducationLevel" />
+                <ScalarProperty Name="EmployeeType" ColumnName="EmployeeType" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="MaritalStatus" ColumnName="MaritalStatus" />
+                <ScalarProperty Name="MobileNumber" ColumnName="MobileNumber" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="Speciality" ColumnName="Speciality" />
+                <ScalarProperty Name="HireDate" ColumnName="HireDate" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="IsCivilEmployee" ColumnName="IsCivilEmployee" />
+                <ScalarProperty Name="EmployerJob" ColumnName="EmployerJob" />
+                <ScalarProperty Name="CivilSalary" ColumnName="CivilSalary" />
+                <ScalarProperty Name="EmployeeImage" ColumnName="EmployeeImage" />
+                <ScalarProperty Name="OpeningNis" ColumnName="OpeningNis" />
+                <ScalarProperty Name="OpeningUsd" ColumnName="OpeningUsd" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EmployeeAttachments">
+            <EntityTypeMapping TypeName="SalaryAppModel.EmployeeAttachments">
+              <MappingFragment StoreEntitySet="EmployeeAttachments">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" />
+                <ScalarProperty Name="FileName" ColumnName="FileName" />
+                <ScalarProperty Name="FileData" ColumnName="FileData" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FixedOperation">
+            <EntityTypeMapping TypeName="SalaryAppModel.FixedOperation">
+              <MappingFragment StoreEntitySet="FixedOperation">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" />
+                <ScalarProperty Name="OperationId" ColumnName="OperationId" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="CurrencyId" ColumnName="CurrencyId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Operation">
+            <EntityTypeMapping TypeName="SalaryAppModel.Operation">
+              <MappingFragment StoreEntitySet="Operation">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="OperationName" ColumnName="OperationName" />
+                <ScalarProperty Name="OperationTypeId" ColumnName="OperationTypeId" />
+                <ScalarProperty Name="IsFixed" ColumnName="IsFixed" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OperationType">
+            <EntityTypeMapping TypeName="SalaryAppModel.OperationType">
+              <MappingFragment StoreEntitySet="OperationType">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="OperationTypeName" ColumnName="OperationTypeName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="SalaryAppModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="User">
+            <EntityTypeMapping TypeName="SalaryAppModel.User">
+              <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="UserFullName" ColumnName="UserFullName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Voucher">
+            <EntityTypeMapping TypeName="SalaryAppModel.Voucher">
+              <MappingFragment StoreEntitySet="Voucher">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="VoucherCode" ColumnName="VoucherCode" />
+                <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" />
+                <ScalarProperty Name="TheDate" ColumnName="TheDate" />
+                <ScalarProperty Name="OperationId" ColumnName="OperationId" />
+                <ScalarProperty Name="VoucherAmount" ColumnName="VoucherAmount" />
+                <ScalarProperty Name="CurrencyId" ColumnName="CurrencyId" />
+                <ScalarProperty Name="ExchangeRate" ColumnName="ExchangeRate" />
+                <ScalarProperty Name="ForeignVoucherAmount" ColumnName="ForeignVoucherAmount" />
+                <ScalarProperty Name="Details" ColumnName="Details" />
+                <ScalarProperty Name="PcNameWhoAdded" ColumnName="PcNameWhoAdded" />
+                <ScalarProperty Name="PcNameWhoModified" ColumnName="PcNameWhoModified" />
+                <ScalarProperty Name="PcNameWhoDeleted" ColumnName="PcNameWhoDeleted" />
+                <ScalarProperty Name="UserWhoAdded" ColumnName="UserWhoAdded" />
+                <ScalarProperty Name="UserWhoModified" ColumnName="UserWhoModified" />
+                <ScalarProperty Name="UserWhoDeleted" ColumnName="UserWhoDeleted" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="IsFixed" ColumnName="IsFixed" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
